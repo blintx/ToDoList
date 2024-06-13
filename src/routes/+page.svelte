@@ -1,26 +1,17 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	let test: HTMLDivElement;
-	let text: HTMLTextAreaElement;
-
-	function Save() {}
+	import Textbox from '../textbox.svelte';
+	let plusbtn: HTMLDivElement;
+	let screen: HTMLDivElement;
+	function createNewTextbox() {}
 	onMount(() => {
-		text.addEventListener('keydown', (e) => {
-			if (e.code === 'Tab') {
-				e.preventDefault();
-				const startSelection = text.selectionStart;
-				const endSelection = text.selectionStart;
-
-				text.value = `${text.value.substring(0, startSelection)}\t${text.value.substring(startSelection, endSelection)}`;
-			}
-			if (e.code === 'KeyS' && e.ctrlKey) {
-				e.preventDefault();
-				Save();
-			}
+		plusbtn.addEventListener('click', (e) => {
+			e.preventDefault();
+			createNewTextbox();
 		});
 	});
 </script>
 
-<div bind:this={test} class="bg-blue-800 h-96 w-96">
-	<textarea bind:this={text} class="bg-white text-left text-black h-80 w-80 m-auto" />
+<div bind:this={screen}>
+	<div bind:this={plusbtn} class="bg-blue-800 rounded-full w-40 h-40 fixed bottom-2 right-2"></div>
 </div>
